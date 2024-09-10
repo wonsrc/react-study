@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CourseInput from './components/CourseGoals/CourseInput';
+import CourseList from './components/CourseGoals/CourseList';
 import './App.css';
-import Expenses from './components/Expenses';
-import NoName from './NoName';
 
-function App() {
-  const expenses = [
-    { id: 1, title: '냠냠치킨', price: 19000, date: new Date(2023, 6, 19) },
-    { id: 2, title: '양파', price: 5000, date: new Date(2023, 6, 20) },
-    { id: 3, title: '포도', price: 20000, date: new Date(2023, 6, 21) },
-    { id: 4, title: '오렌지', price: 15000, date: new Date(2023, 6, 22) },
-  ];
+const DUMMY_DATA = [
+  {
+    id: 'g1',
+    text: '리액트 컴포넌트 스타일 마스터하기',
+  },
+  {
+    id: 'g2',
+    text: 'UI 프로그래밍 삽고수 되기',
+  },
+];
 
-  return (
-    <>
-      <Expenses items={expenses} />
-      <NoName>
-        <ul>
-          <li>사과</li>
-          <li>복숭아</li>
-          <li>포도</li>
-        </ul>
-      </NoName>
-    </>
+const App = () => {
+  const [goals, setGoals] = useState(DUMMY_DATA);
+
+  // CourseList 조건부 렌더링
+  let listContent = (
+    <p style={{ color: 'red', fontSize: '2em', testAlign: 'center' }}>
+      목표를 등록해 주세요!
+    </p>
   );
-}
+
+  if (goals.length > 0) {
+    listContent = <CourseList items={goals} />;
+  }
+  return (
+    <div>
+      <section id='goal-form'>
+        <CourseInput />
+      </section>
+      <section id='goals'>{listContent}</section>
+    </div>
+  );
+};
 
 export default App;
