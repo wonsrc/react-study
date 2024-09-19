@@ -16,6 +16,7 @@ const MealItemForm = ({ id, onAddToCart }) => {
     e.preventDefault();
     // submit이 발동되면 기억하고 있던 수량을 부모에게 넘기겠다.
     onAddToCart(amount);
+    amountHandler(1);
   };
   return (
     <form className={styles.form} onSubmit={formSubmitHandler}>
